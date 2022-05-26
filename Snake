@@ -1,0 +1,98 @@
+public class Snake{
+    public static final int NODIR=0,RIGHTDIR=1,LEFTDIR=-1,UPDIR=2,DOWNDIR=-2;
+    private Game snake;
+    private Board board;
+    private int direction;
+    private boolean gameOver;
+
+    public Game(Game snake, Board board){
+        this.snake = snake;
+        this.board = board;
+    }
+    public Game getSnake(){
+        return snake;
+    }
+    public void setSnake(Game Snake){
+        this.snake = snake;
+    }
+    public Board getBoard(){
+        return board;
+    }
+    public void setBoard(Board board){
+        this.board =board;
+    }
+
+    public boolean isGameOver() {
+        return gameOver;
+    }
+
+    public void setGameOver(boolean gameOver) {
+        this.gameOver = gameOver;
+    }
+
+    public int getDirection() {
+        return direction;
+    }
+
+    public void setDirection(int direction) {
+        this.direction = direction;
+    }
+    public void update(){
+        if(!gameOver){
+            if(direction != NODIR){
+                Cell nextCell = getNextCell(snake.GetHead());
+                if(snake.checkCrash(nextCell)){
+                    setDirection(NODIR);
+                    gameOver=true;
+                }else{
+                    snake.move(nextCell);
+                    if(nextCell.getCellType()==CellType.FOOD){
+                        snake.grow();
+                        board.generateFood();
+
+                    }
+                }
+            }
+        }
+    }
+    public Cell getNextCell(Cell currentPostion){
+        System.out.println("Going to find next cell");
+        int row = currentPostion.getRow();
+        int col = currentPostion.getCol();
+
+        if direction == RIGHTDIR){
+            col++:
+        }else if(direction == LEFTDIR){
+            col--;
+        }else if(direction == UPDIR){
+            row++;
+        }else if(direction - DOWNDIR){
+            row--;
+        }
+        Cell nextCell = board.getCells()[row][col];
+
+        return nextCell;
+    }
+    public static void main(string[] args)
+        System.out.println("Going to start game");
+
+        Cell initPos= new Cell(0,0);
+        Game initSnake = new Snake(initPos);
+        Board board = new Board(10,10);
+        Snake newGame = new Snake(initSnake, board);
+        newGame.gameOver=false;
+        newGame.direction=RIGHTDIR;
+
+
+        for(int i=0; i<5; i++){
+            if(i==2){
+                newGame.board.generateFood();
+
+            }
+            newGame.update();
+            if(i==3)
+                newGame.direction=RIGHTDIR;
+            if(newGame.gameOver ==true)
+                break;
+    }
+}

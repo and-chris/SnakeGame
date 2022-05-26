@@ -1,0 +1,24 @@
+public class Cell{
+    private final int row, col;
+    private CellType cellType;
+    final static int EMPTY=0, FOOD=1, SNAKE_NODE=2;
+
+    public Cell(int row, int col){
+        this.row =row;
+        this.col=col;
+
+    }
+    public CellType getCellType(){
+        return cellType;
+    }
+    public void setCellType(CellType cellType){
+        this.cellType = cellType;
+    }
+    public int getRow(){
+        return row;
+    }
+    public int getCol(){
+        return col;
+    }
+
+}
